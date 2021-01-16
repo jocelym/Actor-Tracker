@@ -20,7 +20,3 @@ def compare(actor, frame):
             return True
     return False
 
-
-# testing
-print(compare('encoding.jpg', 'unknown.jpg'))
-print(compare('encoding.jpg', 'false.jpg'))
