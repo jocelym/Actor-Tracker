@@ -7,7 +7,8 @@ let actor_other_movies = document.getElementById('actorOtherMovies');
 }); */
 
 search_actor.onclick = function() {
-  chrome.tabs.sendMessage(tabs[0].id, {action: "getShowName"});
+  chrome.runtime.sendMessage("hi!");
+
   var foundName = "Famous Person";
   var foundOtherMovies = "Cool Movies"
   document.getElementById("actorName").innerHTML = (
@@ -15,6 +16,5 @@ search_actor.onclick = function() {
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);
   alert("buttonPressed!")
-
 
 };
