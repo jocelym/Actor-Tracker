@@ -1,6 +1,7 @@
 let search_actor = document.getElementById('searchActor');
 let actor_name = document.getElementById('actorName');
 let actor_other_movies = document.getElementById('actorOtherMovies');
+let image = '';
 /*chrome.storage.sync.get('color', function(data) {
   changeColor.style.backgroundColor = data.color;
   changeColor.setAttribute('value', data.color);
@@ -15,7 +16,10 @@ search_actor.onclick = function() {
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);
   alert("buttonPressed!")
-  chrome.tabs.captureVisibleTab(null,{},function(dataUrl){alert(dataUrl);});
+
+  chrome.tabs.captureVisibleTab(null, {} , function(image) {
+    alert(image)
+  });
  
 
 
