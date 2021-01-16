@@ -5,15 +5,13 @@ body {
 }
 
 .container {
-  width: 300px;
+  width: 200px;
   padding: 10px;
   text-align: center;
 }
 
-.notes-container {
-  text-align: center;
-}
-
-li {
-  text-align: left;
+.search_button {
+  height: 30px;
+  width: 100px;
+  outline: none;
 }
