@@ -6,8 +6,14 @@ import re"""
 
 
 def getactors(moviename):
-    webimbd = requests.get("https://www.imdb.com/list/ls058011111/")
+    url = "https://www.imdb.com/find?q=" + moviename.replace(" ", "+") + "&ref_=nv_sr_sm"
+    webimbd = requests.get(url)
     web = BeautifulSoup(webimbd.text, "html.parser")
-    """tags = web.findAll("a")
-    print(tags)"""
-    
+    tags = web.findAll("a")
+    return tags
+
+
+def main():
+    moviename = "Iron Man"
+    actors = getactors(moviename)
+    print(actors)
