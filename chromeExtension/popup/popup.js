@@ -7,6 +7,7 @@ let actor_other_movies = document.getElementById('actorOtherMovies');
 }); */
 
 search_actor.onclick = function() {
+
   chrome.runtime.sendMessage("hi!");
 
   var foundName = "Famous Person";
@@ -16,5 +17,9 @@ search_actor.onclick = function() {
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);
   alert("buttonPressed!")
+  chrome.tabs.captureVisibleTab(null,{},function(dataUrl){alert(dataUrl);});
+ 
+
+
 
 };
