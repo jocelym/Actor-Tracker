@@ -23,4 +23,5 @@ chrome.runtime.onConnect.addListener (function(response, sender, sendResponse){
   console.log("message!!")
   alert(document.querySelectorAll('h4').length);
 }); */
-alert (document.querySelector('h4').textContent);
+alert (document.querySelector('h4').textContent + document.querySelector('span').textContent );
+alert (document.querySelector('span').textContent);
