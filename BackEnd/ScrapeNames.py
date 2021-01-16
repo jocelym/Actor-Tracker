@@ -4,24 +4,36 @@ from bs4 import BeautifulSoup
 import urllib.request
 import re"""
 
+"""
+Module to create database for movie
+Database will include actor name, name id on IMBd and actor reference picture
+"""
+
 
 def getactors(moviename):
-    url = "https://www.imdb.com/find?q=" + moviename.replace(" ", "+") + "&ref_=nv_sr_sm"
-    webimbd = requests.get(url)
+    """
+    Search movie name on IMDb
+    """
+    webimbd = requests.get("https://www.imdb.com/find?q=" + moviename.replace(" ", "+") + "&ref_=nv_sr_sm")
     web = BeautifulSoup(webimbd.text, "html.parser")
     table = web.find('table')
     link = table.find('a')
-    movielink = "https://www.imdb.com/" + link.get('href') + "fullcredits?ref_=tt_cl_sm#cast"
-    webimbd = requests.get(movielink)
+    """
+    Use title ID (link.get('href')) to find full credits page
+    """
+    webimbd = requests.get("https://www.imdb.com/" + link.get('href') + "fullcredits?ref_=tt_cl_sm#cast")
     web = BeautifulSoup(webimbd.text, "html.parser")
     actors = []
+    """
+    Find each instance of an actor find link, name and image link
+    """
     for table in web.find_all('td', {'class': 'primary_photo'}):
         link = table.find('a')
         actorlink = "https://www.imdb.com/" + link.get('href') + "?ref_=tt_cl_i1"
-        webimbd = requests.get(actorlink)
-        web = BeautifulSoup(webimbd.text, "html.parser")
-        table = web.find('span', {'class': 'itemprop'})
-        actors.append(table)
+        actor = table.find('img')
+        actorname = actor["alt"]
+        actorimage = actor["src"]
+        actors[actorname] = (actorimage, actorlink)
     return actors
 
 
