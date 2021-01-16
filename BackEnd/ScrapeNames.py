@@ -14,13 +14,10 @@ def getactors(moviename):
     movielink = "https://www.imdb.com/" + link.get('href') + "fullcredits?ref_=tt_cl_sm#cast"
     webimbd = requests.get(movielink)
     web = BeautifulSoup(webimbd.text, "html.parser")
-    actornumbers = []
+    actors = []
     for table in web.find_all('td', {'class': 'primary_photo'}):
         link = table.find('a')
-        actornumbers.append(link.get('href'))
-    actors = []
-    for actor in actornumbers:
-        actorlink = "https://www.imdb.com/" + actor + "?ref_=tt_cl_i1"
+        actorlink = "https://www.imdb.com/" + link.get('href') + "?ref_=tt_cl_i1"
         webimbd = requests.get(actorlink)
         web = BeautifulSoup(webimbd.text, "html.parser")
         table = web.find('span', {'class': 'itemprop'})
