@@ -1,10 +1,10 @@
 var saveNote = document.querySelector('#save-note');
-var deleteNotes = document.querySelector('#delete-notes');
+var deleteSearch = document.querySelector('#delete-search');
 var notesField = document.querySelector('#note-value');
-
+var actorInfo = document.querySelector('#actor-info');
 
 // Populate Notes From Page
-chrome.tabs.query({
+/*chrome.tabs.query({
   active: true,
   lastFocusedWindow: true
 }, tabs => {
@@ -21,7 +21,7 @@ chrome.tabs.query({
       }
     }
   });
-});
+}); */
 
 notesField.focus();
 
@@ -45,6 +45,7 @@ deleteNotes.onclick = function () {
 
 // Save Note
 saveNote.onclick = function () {
+  document.getElementById("actor-info").innerHTML = "hi";
   chrome.tabs.query({
     active: true,
     currentWindow: true
@@ -65,3 +66,7 @@ saveNote.onclick = function () {
   });
   location.reload();
 };
+
+function getActorInfo() {
+
+}
