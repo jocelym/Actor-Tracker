@@ -1,9 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700,900');
+
 body {
   padding-top: 10px;
   text-align: center;
-  background-color: #f0f0f0;
-}
+  background-color: #332e2e;
+  font-family: 'Roboto';
 
+}
+.container {
+  background-color: #b3b3b3;
+  border-radius : 8px;
+}
+h1 {
+  color : #960c13;
+}
+.search_button {
+  background-color: white;
+  border-radius: 8px;
+  color: #960c13;
+  text-shadow: 1px 1px 2px #b3b3b3;
+  width: 10px;
+}
 .container {
   width: 200px;
   padding: 10px;
