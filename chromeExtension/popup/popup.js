@@ -7,6 +7,7 @@ let actor_other_movies = document.getElementById('actorOtherMovies');
 }); */
 
 search_actor.onclick = function() {
+  chrome.tabs.sendMessage(tabs[0].id, {action: "getShowName"});
   var foundName = "Famous Person";
   var foundOtherMovies = "Cool Movies"
   document.getElementById("actorName").innerHTML = (
