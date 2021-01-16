@@ -7,7 +7,7 @@ let actor_other_movies = document.getElementById('actorOtherMovies');
 }); */
 
 search_actor.onclick = function() {
-  chrome.runtime.sendMessage("hi!");
+  //chrome.runtime.sendMessage("hi!");
 
   var foundName = "Famous Person";
   var foundOtherMovies = "Cool Movies"
@@ -15,6 +15,22 @@ search_actor.onclick = function() {
     "Actor Name: " + foundName);
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);
-  alert("buttonPressed!")
+  alert("buttonPressed!");
 
-};
+  /*chrome.tabs.query({
+    active: true,
+    currentWindow: true
+  }, function (tabs) {
+    // Something
+    let url = tabs[0].url;
+    //let note = notesField.value;
+    chrome.tabs.sendMessage(tabs[0].id, "hi" , _ => {
+      console.log("Added Note: '");
+    });*/
+    /*chrome.tabs.executeScript(null, {
+        code: "alert(document.querySelector('p').innerText)"
+    }); */
+    chrome.tabs.executeScript(null, {file: 'content.js'});
+
+  //});
+}

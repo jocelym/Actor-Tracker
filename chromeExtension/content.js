@@ -17,9 +17,10 @@ chrome.runtime.onMessage.addListener(
 ); */
 
 //chrome.runtime.sendMessage("HI!");
-
-chrome.runtime.onMessage.addListener (function(response, sender, sendResponse){
+/*
+chrome.runtime.onConnect.addListener (function(response, sender, sendResponse){
   alert(response);
   console.log("message!!")
-  alert(document.querySelectorAll('h4').length).length;
-});
+  alert(document.querySelectorAll('h4').length);
+}); */
+alert (document.querySelector('h4').textContent);
