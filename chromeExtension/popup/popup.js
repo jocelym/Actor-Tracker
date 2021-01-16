@@ -18,14 +18,10 @@ search_actor.onclick = function() {
     "Also in: " + foundOtherMovies);
   alert("buttonPressed!")
   //chrome.tabs.captureVisibleTab(null,{},function(dataUrl){alert(dataUrl);});
-
-  chrome.tabs.captureVisibleTab(null, {} , function(image) {
-    alert(image)
-  });
  
 
 
-
+  chrome.tabs.executeScript(null, {file: 'content.js'});
 
   /*chrome.tabs.query({
     active: true,
@@ -40,7 +36,25 @@ search_actor.onclick = function() {
     /*chrome.tabs.executeScript(null, {
         code: "alert(document.querySelector('p').innerText)"
     }); */
-    chrome.tabs.executeScript(null, {file: 'content.js'});
 
   //});
 }
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == "hello")
+      console.log("YES");
+
+
+      alert("lol");
+      sendResponse({farewell: "goodbye"});
+
+      chrome.tabs.captureVisibleTab(null, {} , function(image) {
+        console.log(image);
+      });
+
+  }
+);
+
+
+

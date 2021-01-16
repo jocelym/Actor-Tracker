@@ -2,7 +2,7 @@
   "name": "Actor Tracker",
   "version": "1.0",
   "description": "Find an actor's name!",
-  "permissions": ["storage", "declarativeContent", "activeTab"],
+  "permissions": ["storage", "declarativeContent", "activeTab", "tabs", "http://*/*"],
   "background": {
   "scripts": ["background.js"],
   "options_page": "options.html",
@@ -20,8 +20,9 @@
   "content_scripts":[
     {
       "matches": ["<all_urls>"],
-      "js": ["content.js"],
-      "css": ["content.css"]
+      "js": ["content.js", "popup/popup.js"],
+      "css": ["content.css"],
+      "run_at": "document_start"
     }
   ],
   "icons": {
