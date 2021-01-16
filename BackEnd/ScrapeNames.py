@@ -9,8 +9,23 @@ def getactors(moviename):
     url = "https://www.imdb.com/find?q=" + moviename.replace(" ", "+") + "&ref_=nv_sr_sm"
     webimbd = requests.get(url)
     web = BeautifulSoup(webimbd.text, "html.parser")
-    tags = web.findAll("a")
-    return tags
+    table = web.find('table')
+    link = table.find('a')
+    movielink = "https://www.imdb.com/" + link.get('href') + "fullcredits?ref_=tt_cl_sm#cast"
+    webimbd = requests.get(movielink)
+    web = BeautifulSoup(webimbd.text, "html.parser")
+    actornumbers = []
+    for table in web.find_all('td', {'class': 'primary_photo'}):
+        link = table.find('a')
+        actornumbers.append(link.get('href'))
+    actors = []
+    for actor in actornumbers:
+        actorlink = "https://www.imdb.com/" + actor + "?ref_=tt_cl_i1"
+        webimbd = requests.get(actorlink)
+        web = BeautifulSoup(webimbd.text, "html.parser")
+        table = web.find('span', {'class': 'itemprop'})
+        actors.append(table)
+    return actors
 
 
 def main():
