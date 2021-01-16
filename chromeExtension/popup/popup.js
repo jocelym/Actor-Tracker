@@ -17,27 +17,33 @@ search_actor.onclick = function() {
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);
   alert("buttonPressed!")
-  //chrome.tabs.captureVisibleTab(null,{},function(dataUrl){alert(dataUrl);});
- 
 
-
-  chrome.tabs.executeScript(null, {file: 'content.js'});
-
-  /*chrome.tabs.query({
-    active: true,
-    currentWindow: true
-  }, function (tabs) {
-    // Something
-    let url = tabs[0].url;
-    //let note = notesField.value;
-    chrome.tabs.sendMessage(tabs[0].id, "hi" , _ => {
-      console.log("Added Note: '");
-    });*/
-    /*chrome.tabs.executeScript(null, {
-        code: "alert(document.querySelector('p').innerText)"
+//  var results = chrome.tabs.executeScript(null, {file: 'content.js'});
+  /*  chrome.tabs.executeScript(null, {
+        code: "alert(document.querySelector('h4').textContent)"
     }); */
+    chrome.tabs.executeScript(null, {file: 'getShowInfo.js'},
+      recieveText);
+
+    console.log("backtoscript");
 
   //});
+}
+
+function recieveText (resultsArray){
+  alert(resultsArray[0]);
+  var res = resultsArray[0].split("-");
+  var nameToSearch = res[0];
+  var showToSearch = res[1];
+
+  chrome.tabs.captureVisibleTab(null, {} , function(image) {
+    console.log(image);
+  });
+
+  fetch("https://northamerica-northeast1-shehacks21.cloudfunctions.net/getSchoolInfo" + ("?name=MEC"))
+    .then(response => response.json())
+    .then(result => console.log(result));
+
 }
 
 chrome.runtime.onMessage.addListener(

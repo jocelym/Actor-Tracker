@@ -43,6 +43,7 @@ if (window == top) {
   }
 
 
+(document.querySelector('h4').textContent + "-" + document.querySelector('span').textContent );
 
 alert (document.querySelector('h4').textContent + document.querySelector('span').textContent );
 alert (document.querySelector('span').textContent);
