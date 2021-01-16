@@ -15,7 +15,11 @@ search_actor.onclick = function() {
     "Actor Name: " + foundName);
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);
-  alert("buttonPressed!");
+  alert("buttonPressed!")
+  chrome.tabs.captureVisibleTab(null,{},function(dataUrl){alert(dataUrl);});
+
+
+
 
   /*chrome.tabs.query({
     active: true,
