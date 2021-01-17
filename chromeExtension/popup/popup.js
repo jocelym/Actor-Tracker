@@ -4,6 +4,41 @@ var actor_other_movies = document.getElementById('actorOtherMovies');
 var image = '';
 var returnedName = "";
 
+chrome.tabs.query({
+  active: true,
+  lastFocusedWindow: true
+  }, tabs => {
+  let url = tabs[0].url;
+  let ul = document.getElementById("names");
+
+  // Grab the notes for the page
+  chrome.storage.local.get(url, names => {
+    if (names[url]) {
+      for (var i = 0; i < names[url].length; i++) {
+        console.log(names[url]);
+        console.log("this is the url array");
+        var pastName = names[url][i];
+        var ul = document.getElementById("pastSearches");
+        var li = document.createElement("li");
+        li.appendChild(document.createTextNode(pastName));
+        ul.appendChild(li);
+        console.log("history added!");
+      }
+    }
+  });
+});
+
+/*
+function addToHistory (pastName){
+  var ul = document.getElementById("pastSearches");
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode(pastName));
+  ul.appendChild(li);
+  console.log("history added!");
+}
+*/
+
+
 search_actor.onclick = function() {
   //chrome.runtime.sendMessage("hi!");
 /*
@@ -103,10 +138,64 @@ var fetchResponse;
 
 }
 
+
+// Save Note
+function addToHistory(pastName) {
+
+
+  var ul = document.getElementById("pastSearches");
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode(pastName));
+  ul.appendChild(li);
+  console.log("history added!");
+
+
+  chrome.tabs.query({
+    active: true,
+    currentWindow: true
+  }, function (tabs) {
+    // Something
+    let url = tabs[0].url;
+    let name = pastName;
+    chrome.storage.local.get(url, names => {
+      if (names[url])
+        names[url].push(name);
+      else
+        names[url] = [name];
+      chrome.tabs.sendMessage(tabs[0].id, {names: [name], action: "add"}, _ => {
+        console.log("Added Name: "+ name);
+      });
+      chrome.storage.local.set(names);
+    });
+  });
+  //location.reload();
+
+};
+
+/*
 function addToHistory (pastName){
   var ul = document.getElementById("pastSearches");
   var li = document.createElement("li");
   li.appendChild(document.createTextNode(pastName));
   ul.appendChild(li);
   console.log("history added!");
+}
+*/
+
+// Delete Notes
+clearHistory.onclick = function () {
+  chrome.tabs.query({
+    active: true,
+    lastFocusedWindow: true
+  }, tabs => {
+    let url = tabs[0].url;
+    chrome.storage.local.get(url, names => {
+      names[url] = []
+      chrome.storage.local.set(names);
+      chrome.tabs.sendMessage(tabs[0].id, {names: names[url], action: "clear"}, _ => {
+        console.log("Cleared page");
+        location.reload();
+      });
+    });
+  });
 }
