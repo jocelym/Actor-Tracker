@@ -30,6 +30,34 @@ search_actor.onclick = function() {
   //});
 }
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    if (request.greeting == "hello")
+      console.log("YES");
+
+
+      var foundName = "Famous Person";
+  var foundOtherMovies = "Cool Movies"
+  document.getElementById("actorName").innerHTML = (
+    "Actor Name: " + foundName);
+  document.getElementById("actorOtherMovies").innerHTML = (
+    "Also in: " + foundOtherMovies);
+  alert("buttonPressed!")
+
+//  var results = chrome.tabs.executeScript(null, {file: 'content.js'});
+  /*  chrome.tabs.executeScript(null, {
+        code: "alert(document.querySelector('h4').textContent)"
+    }); */
+    chrome.tabs.executeScript(null, {file: 'getShowInfo.js'},
+      recieveText);
+
+    console.log("backtoscript");
+
+  //});
+
+  }
+);
+
 function recieveText (resultsArray){
   alert(resultsArray[0]);
   var res = resultsArray[0].split("-");
@@ -46,21 +74,7 @@ function recieveText (resultsArray){
 
 }
 
-chrome.runtime.onMessage.addListener(
-  function(request, sender, sendResponse) {
-    if (request.greeting == "hello")
-      console.log("YES");
 
-
-      alert("lol");
-      sendResponse({farewell: "goodbye"});
-
-      chrome.tabs.captureVisibleTab(null, {} , function(image) {
-        console.log(image);
-      });
-
-  }
-);
 
 
 
