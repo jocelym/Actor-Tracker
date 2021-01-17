@@ -59,10 +59,13 @@ function recieveText (resultsArray){
   chrome.tabs.captureVisibleTab(null, {} , function(image) {
     console.log(image);
   });
-
+  let returnedName = "";
   fetch("https://northamerica-northeast1-shehacks21.cloudfunctions.net/getSchoolInfo" + ("?name=MEC"))
     .then(response => response.json())
     .then(result => console.log(result));
+
+
+  alert(returnedData.name);
 
 
   /*document.getElementById("actorName").innerHTML = (
