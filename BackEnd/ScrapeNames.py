@@ -18,5 +18,7 @@ def getactors(moviename):
     for table in web.find_all('td', {'class': 'primary_photo'}):
         link = table.find('a')
         actor = table.find('img')
-        actors.append({"Name": actor["alt"], "Image": actor["src"], "Link": "https://www.imdb.com/" + link.get('href') + "?ref_=tt_cl_i1"})
+        if actor["class"] != []:
+            image = actor["loadlate"].replace("32", "214")
+            actors.append({"Name": actor["alt"], "Image": image.replace("44", "317"), "Link": "https://www.imdb.com/" + link.get('href') + "?ref_=tt_cl_i1"})
     return actors
