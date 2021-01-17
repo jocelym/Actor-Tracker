@@ -1,11 +1,8 @@
-let search_actor = document.getElementById('searchActor');
-let actor_name = document.getElementById('actorName');
-let actor_other_movies = document.getElementById('actorOtherMovies');
-let image = '';
-/*chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
-}); */
+var search_actor = document.getElementById('searchActor');
+var actor_name = document.getElementById('actorName');
+var actor_other_movies = document.getElementById('actorOtherMovies');
+var image = '';
+var returnedName = "";
 
 search_actor.onclick = function() {
   //chrome.runtime.sendMessage("hi!");
@@ -25,7 +22,7 @@ search_actor.onclick = function() {
     chrome.tabs.executeScript(null, {file: 'getShowInfo.js'},
       recieveText);
 
-    console.log("backtoscript");
+    console.log(returnedName);
 
   //});
 }
@@ -38,14 +35,10 @@ chrome.runtime.onMessage.addListener(
     chrome.tabs.executeScript(null, {file: 'getShowInfo.js'},
         recieveText);
 
-    console.log("backtoscript");
+});
 
-
-  }
-);
 
 function recieveText (resultsArray){
-  alert(resultsArray[0]);
   var res = resultsArray[0].split("*");
   var nameToSearch = res[0];
   var showToSearch = res[1];
@@ -53,22 +46,43 @@ function recieveText (resultsArray){
   if (showToSearch != undefined){
     console.log("emptyField!");
     showToSearch = "";
-
   }
   alert(showToSearch);
   chrome.tabs.captureVisibleTab(null, {} , function(image) {
     console.log(image);
   });
-
-  fetch("https://northamerica-northeast1-shehacks21.cloudfunctions.net/getSchoolInfo" + ("?name=MEC"))
+var fetchResponse;
+  fetch("https://northamerica-northeast1-shehacks21.cloudfunctions.net/getActorInfo") //+ ("?name=MEC"))
     .then(response => response.json())
-    .then(result => console.log(result));
+    .then((data) => {
+      document.getElementById("actorName").innerHTML = (
+        "Actor Name: " + data['Actors'][0]["Name"]);
+      addToHistory(data.Code);
+      document.getElementById("actorPhoto").src = (
+        data['Actors'][0]["Image"]);
 
+      document.getElementById("born").innerHTML = (
+        "Born: " + data['Actors'][0]['Born']);
 
-  /*document.getElementById("actorName").innerHTML = (
+      document.getElementById("actorOtherMovies").innerHTML = (
+        "Also in: " + data.School);
+      console.log(data);
+    })
+  //console.log(fetchResponse);
+  console.log(returnedName);
+
+/*  document.getElementById("actorName").innerHTML = (
     "Actor Name: " + foundName);
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);*/
   alert("buttonPressed!")
 
+}
+
+function addToHistory (pastName){
+  var ul = document.getElementById("pastSearches");
+  var li = document.createElement("li");
+  li.appendChild(document.createTextNode(pastName));
+  ul.appendChild(li);
+  console.log("history added!");
 }
