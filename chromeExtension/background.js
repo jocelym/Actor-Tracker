@@ -16,5 +16,13 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log("yes");
+    if (request.greeting == "hello")
+      sendResponse({farewell: "goodbye"});
+  }
+);
+
 
 
