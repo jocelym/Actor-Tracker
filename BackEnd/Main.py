@@ -1,13 +1,15 @@
 import json
-from ScrapeNames import getactors
-from ScrapeInfo import getactorinfo
-from Compare import compare
+from joined import getactors
 
-def main(moviename, frame):
-    actors = getactors(moviename)
-    actorsinfo = []
-    for actor in actors:
-        if compare(actor["Image"], frame):
-            actorsinfo.append(getactorinfo(actor))
-    finalinfo = {"Actors": actorsinfo}
-    return json.dumps(finalinfo)
+def main(request):
+    request_json = request.get_json(silent=True)
+    request_args = request.args
+
+    if request_json and 'name' in request_json:
+        moviename = request_json['movieTitle']
+        frame = request_json['frame']
+    elif request_args and 'name' in request_args:
+        moviename = request_args['movieTitle']
+        frame = request_args['frame']
+
+    return getactors(moviename, frame)

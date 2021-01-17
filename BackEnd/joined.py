@@ -76,3 +76,6 @@ def getactors(moviename, frame):
                 num += 1
     finalinfo = {"Actors": actorsinfo}
     return json.dumps(finalinfo)
+
+
+
