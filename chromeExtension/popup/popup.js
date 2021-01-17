@@ -49,28 +49,32 @@ function recieveText (resultsArray){
   }
   alert(showToSearch);
   chrome.tabs.captureVisibleTab(null, {} , function(image) {
-    console.log(image);
+    //console.log(image);
   });
 
 var fetchResponse;
   fetch("https://northamerica-northeast1-shehacks21.cloudfunctions.net/getActorInfo") //+ ("?name=MEC"))
     .then(response => response.json())
     .then((data) => {
+
       document.getElementById("actorName").innerHTML = (
         "Actor Name: " + data['Actors'][0]["Name"]);
-      addToHistory(data.Code);
-      document.getElementById("actorPhoto").src = (
-        data['Actors'][0]["Image"]);
+      addToHistory(data['Actors'][0]["Name"]);
+    //  console.log(len(data["Actors"]);
+
+      var img = document.createElement('img');
+      img.src = (data['Actors'][0]["Image"]);
+      document.getElementById("actorPhoto").append(img);
 
       document.getElementById("born").innerHTML = (
         "Born: " + data['Actors'][0]['Born']);
 
       document.getElementById("actorOtherMovies").innerHTML = (
-        "Also in: " + data.School);
+        "May have seen them in: " + data['Actors'][0]['Known For']);
+
       console.log(data);
     })
   //console.log(fetchResponse);
-  console.log(returnedName);
 
 /*  document.getElementById("actorName").innerHTML = (
 
