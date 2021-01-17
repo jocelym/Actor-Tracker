@@ -23,6 +23,7 @@ chrome.runtime.onMessage.addListener(
   console.log("message!!")
   alert(document.querySelectorAll('h4').length).length;
 });*/
+
 if (window == top) {
   window.addEventListener('keyup', doKeyPress, false); //add the keyboard handler
     console.log("Hello");
@@ -43,8 +44,9 @@ if (window == top) {
   }
 
 
-(document.querySelector('h4').textContent + "-" + document.querySelector('span').textContent );
+//(document.querySelector('h4').textContent + "-" + document.querySelector('span').textContent );
 
-alert (document.querySelector('h4').textContent + document.querySelector('span').textContent );
-alert (document.querySelector('span').textContent);
+
+//alert (document.querySelector('h4').textContent + document.querySelector('span').textContent );
+//alert (document.querySelector('span').textContent);
 

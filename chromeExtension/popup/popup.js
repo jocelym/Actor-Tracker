@@ -60,10 +60,16 @@ chrome.runtime.onMessage.addListener(
 
 function recieveText (resultsArray){
   alert(resultsArray[0]);
-  var res = resultsArray[0].split("-");
+  var res = resultsArray[0].split("*");
   var nameToSearch = res[0];
   var showToSearch = res[1];
+  alert(nameToSearch);
+  if (showToSearch != undefined){
+    console.log("emptyField!");
+    showToSearch = "";
 
+  }
+  alert(showToSearch);
   chrome.tabs.captureVisibleTab(null, {} , function(image) {
     console.log(image);
   });
