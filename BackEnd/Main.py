@@ -1,5 +1,7 @@
 import json
-
+from ScrapeNames import getactors
+from ScrapeInfo import getactorinfo
+from Compare import compare
 
 def main(moviename, frame):
     actors = getactors(moviename)
