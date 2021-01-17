@@ -23,8 +23,8 @@ chrome.runtime.onMessage.addListener(
   console.log("message!!")
   alert(document.querySelectorAll('h4').length).length;
 });*/
-console.log("Arrived");
-(document.querySelector('h4').textContent + "-" + document.querySelector('span').textContent );
+//console.log("Arrived");
+//(document.querySelector('h4').textContent + "-" + document.querySelector('span').textContent );
 
 
 /*var image = '';
