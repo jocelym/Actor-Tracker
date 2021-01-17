@@ -6,14 +6,14 @@ var returnedName = "";
 
 search_actor.onclick = function() {
   //chrome.runtime.sendMessage("hi!");
-
+/*
   var foundName = "Famous Person";
   var foundOtherMovies = "Cool Movies"
   document.getElementById("actorName").innerHTML = (
     "Actor Name: " + foundName);
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);
-  alert("buttonPressed!")
+*/
 
 //  var results = chrome.tabs.executeScript(null, {file: 'content.js'});
   /*  chrome.tabs.executeScript(null, {
@@ -42,12 +42,12 @@ function recieveText (resultsArray){
   var res = resultsArray[0].split("*");
   var nameToSearch = res[0];
   var showToSearch = res[1];
-  alert(nameToSearch);
+
   if (showToSearch != undefined){
     console.log("emptyField!");
     showToSearch = "";
   }
-  alert(showToSearch);
+  //alert(showToSearch);
   chrome.tabs.captureVisibleTab(null, {} , function(image) {
     //console.log(image);
   });
@@ -57,10 +57,16 @@ var fetchResponse;
     .then(response => response.json())
     .then((data) => {
 
+      var numObjects = (Object.keys(data['Actors']).length);
+      alert(numObjects);
+      var pos;
+      for (pos = 0; pos < numObjects; pos++ ){
+
+      } 
+
       document.getElementById("actorName").innerHTML = (
         "Actor Name: " + data['Actors'][0]["Name"]);
       addToHistory(data['Actors'][0]["Name"]);
-    //  console.log(len(data["Actors"]);
 
       var img = document.createElement('img');
       img.src = (data['Actors'][0]["Image"]);
@@ -71,6 +77,7 @@ var fetchResponse;
 
       document.getElementById("actorOtherMovies").innerHTML = (
         "May have seen them in: " + data['Actors'][0]['Known For']);
+
 
       console.log(data);
     })
@@ -92,7 +99,7 @@ var fetchResponse;
     "Actor Name: " + foundName);
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);*/
-  alert("buttonPressed!")
+
 
 }
 
