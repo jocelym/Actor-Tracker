@@ -98,6 +98,10 @@ var fetchResponse;
         document.getElementById("born" + pos).innerHTML = (
           "Born: " + data['Actors'][pos]['Born']);
 
+        var linkText = "More Info Here"
+        var result = linkText.link(data['Actors'][pos]['Link'])
+        document.getElementById("actorLink" + pos).innerHTML = (result);
+
           var numMovObjects = (Object.keys(data['Actors'][pos]["Known For"]).length);
         //  alert (numMovObjects);
 
