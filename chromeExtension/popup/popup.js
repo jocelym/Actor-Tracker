@@ -79,7 +79,7 @@ function recieveText (resultsArray){
   });
 
 var fetchResponse;
-  fetch("https://northamerica-northeast1-shehacks21.cloudfunctions.net/getActorInfo") //+ ("?name=MEC"))
+  fetch("https://northamerica-northeast1-shehacks21.cloudfunctions.net/getActorInfoHP") //+ ("?name=MEC"))
     .then(response => response.json())
     .then((data) => {
 
@@ -89,7 +89,7 @@ var fetchResponse;
       for (pos = 0; pos < numObjects; pos++ ){
         document.getElementById("actorName" + pos).innerHTML = (
           "Actor Name: " + data['Actors'][pos]["Name"]);
-        addToHistory(data['Actors'][pos]["Name"]);
+        addToHistory(data['Actors'][pos]["Name"], data['Actors'][pos]["Link"]);
 
         var img = document.createElement('img');
         img.src = (data['Actors'][pos]["Image"]);
@@ -160,9 +160,12 @@ function clearLists(){
 }
 
 // Save Note
-function addToHistory(pastName) {
+function addToHistory(pastName, link) {
   var ul = document.getElementById("pastSearches");
   var li = document.createElement("li");
+
+  //var linkText = "More Info Here"
+  //var result = linkText.link(data['Actors'][pos]['Link'])
   li.appendChild(document.createTextNode(pastName));
   ul.appendChild(li);
   console.log("history added!");
