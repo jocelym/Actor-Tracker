@@ -3,6 +3,7 @@ var actor_name = document.getElementById('actorName');
 var actor_other_movies = document.getElementById('actorOtherMovies');
 var image = '';
 var returnedName = "";
+var clear_history = document.getElementById('clearHistory');
 
 chrome.tabs.query({
   active: true,
@@ -27,17 +28,6 @@ chrome.tabs.query({
     }
   });
 });
-
-/*
-function addToHistory (pastName){
-  var ul = document.getElementById("pastSearches");
-  var li = document.createElement("li");
-  li.appendChild(document.createTextNode(pastName));
-  ul.appendChild(li);
-  console.log("history added!");
-}
-*/
-
 
 search_actor.onclick = function() {
   //chrome.runtime.sendMessage("hi!");
@@ -96,22 +86,34 @@ var fetchResponse;
       alert(numObjects);
       var pos;
       for (pos = 0; pos < numObjects; pos++ ){
+        document.getElementById("actorName" + pos).innerHTML = (
+          "Actor Name: " + data['Actors'][pos]["Name"]);
+        addToHistory(data['Actors'][pos]["Name"]);
 
-      } 
+        var img = document.createElement('img');
+        img.src = (data['Actors'][pos]["Image"]);
+        document.getElementById("actorPhoto" + pos).append(img);
 
-      document.getElementById("actorName").innerHTML = (
-        "Actor Name: " + data['Actors'][0]["Name"]);
-      addToHistory(data['Actors'][0]["Name"]);
+        document.getElementById("born" + pos).innerHTML = (
+          "Born: " + data['Actors'][pos]['Born']);
 
-      var img = document.createElement('img');
-      img.src = (data['Actors'][0]["Image"]);
-      document.getElementById("actorPhoto").append(img);
+          var numMovObjects = (Object.keys(data['Actors'][pos]["Known For"]).length);
+          alert (numMovObjects);
 
-      document.getElementById("born").innerHTML = (
-        "Born: " + data['Actors'][0]['Born']);
 
-      document.getElementById("actorOtherMovies").innerHTML = (
-        "May have seen them in: " + data['Actors'][0]['Known For']);
+
+        document.getElementById("alsoIn" + pos).innerHTML = ("Also In:")
+        var ul = document.getElementById("actorOtherMovies"+pos);
+          for(movPos = 0; movPos < numMovObjects; movPos++){
+            var li = document.createElement("li");
+            li.appendChild(document.createTextNode(data['Actors'][pos]['Known For'][movPos]));
+            ul.appendChild(li);
+
+          }
+
+
+      }
+
 
 
       console.log(data);
@@ -137,7 +139,6 @@ var fetchResponse;
 
 
 }
-
 
 // Save Note
 function addToHistory(pastName) {
@@ -183,7 +184,8 @@ function addToHistory (pastName){
 */
 
 // Delete Notes
-clearHistory.onclick = function () {
+clear_history.onclick = function () {
+  console.log("history button clicked");
   chrome.tabs.query({
     active: true,
     lastFocusedWindow: true
