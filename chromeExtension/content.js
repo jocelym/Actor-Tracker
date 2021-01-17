@@ -29,9 +29,11 @@ if (window == top) {
     console.log("Hello");
   }
 
+
   trigger_key = 65; // A key
+
   function doKeyPress(e){
-    if (e.shiftKey && e.keyCode == trigger_key){ // if e.shiftKey is not provided then script will run at all instances of typing "G"
+    if (/*e.shiftKey &&*/ e.keyCode == trigger_key){ // if e.shiftKey is not provided then script will run at all instances of typing "G"
       console.log('Hi!');
       console.log("Hello again");
 

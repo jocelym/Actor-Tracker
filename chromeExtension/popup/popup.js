@@ -51,6 +51,7 @@ function recieveText (resultsArray){
   chrome.tabs.captureVisibleTab(null, {} , function(image) {
     console.log(image);
   });
+
 var fetchResponse;
   fetch("https://northamerica-northeast1-shehacks21.cloudfunctions.net/getActorInfo") //+ ("?name=MEC"))
     .then(response => response.json())
@@ -72,6 +73,18 @@ var fetchResponse;
   console.log(returnedName);
 
 /*  document.getElementById("actorName").innerHTML = (
+
+  let returnedName = "";
+  fetch("https://northamerica-northeast1-shehacks21.cloudfunctions.net/getSchoolInfo" + ("?name=MEC"))
+    .then(response => response.json())
+    .then(result => console.log(result));
+
+
+  alert(returnedData.name);
+
+
+  /*document.getElementById("actorName").innerHTML = (
+
     "Actor Name: " + foundName);
   document.getElementById("actorOtherMovies").innerHTML = (
     "Also in: " + foundOtherMovies);*/
