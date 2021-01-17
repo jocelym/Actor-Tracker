@@ -7,5 +7,5 @@ def main(moviename, frame):
     for actor in actors:
         if compare(actor["Image"], frame):
             actorsinfo.append(getactorinfo(actor))
-    finalinfo = {"Data": actorsinfo}
+    finalinfo = {"Actors": actorsinfo}
     return json.dumps(finalinfo)
