@@ -35,25 +35,11 @@ chrome.runtime.onMessage.addListener(
     if (request.greeting == "hello")
       console.log("YES");
 
-
-      var foundName = "Famous Person";
-  var foundOtherMovies = "Cool Movies"
-  document.getElementById("actorName").innerHTML = (
-    "Actor Name: " + foundName);
-  document.getElementById("actorOtherMovies").innerHTML = (
-    "Also in: " + foundOtherMovies);
-  alert("buttonPressed!")
-
-//  var results = chrome.tabs.executeScript(null, {file: 'content.js'});
-  /*  chrome.tabs.executeScript(null, {
-        code: "alert(document.querySelector('h4').textContent)"
-    }); */
     chrome.tabs.executeScript(null, {file: 'getShowInfo.js'},
-      recieveText);
+        recieveText);
 
     console.log("backtoscript");
 
-  //});
 
   }
 );
@@ -78,9 +64,11 @@ function recieveText (resultsArray){
     .then(response => response.json())
     .then(result => console.log(result));
 
+
+  /*document.getElementById("actorName").innerHTML = (
+    "Actor Name: " + foundName);
+  document.getElementById("actorOtherMovies").innerHTML = (
+    "Also in: " + foundOtherMovies);*/
+  alert("buttonPressed!")
+
 }
-
-
-
-
-
