@@ -84,7 +84,7 @@ var fetchResponse;
     .then((data) => {
 
       var numObjects = (Object.keys(data['Actors']).length);
-      alert(numObjects);
+    //  alert(numObjects);
       var pos;
       for (pos = 0; pos < numObjects; pos++ ){
         document.getElementById("actorName" + pos).innerHTML = (
@@ -99,7 +99,7 @@ var fetchResponse;
           "Born: " + data['Actors'][pos]['Born']);
 
           var numMovObjects = (Object.keys(data['Actors'][pos]["Known For"]).length);
-          alert (numMovObjects);
+        //  alert (numMovObjects);
 
 
 
