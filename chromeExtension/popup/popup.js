@@ -64,6 +64,7 @@ chrome.runtime.onMessage.addListener(
 
 
 function recieveText (resultsArray){
+  clearLists();
   var res = resultsArray[0].split("*");
   var nameToSearch = res[0];
   var showToSearch = res[1];
@@ -140,10 +141,22 @@ var fetchResponse;
 
 }
 
+function clearLists(){
+  var num;
+  for (num = 0; num < 3; num++){
+    var list = document.getElementById("actorOtherMovies" + num);
+    while (list.hasChildNodes()){
+      list.removeChild(list.firstChild);
+    }
+
+    document.getElementById("actorPhoto" + num).innerHTML = "";
+  }
+
+
+}
+
 // Save Note
 function addToHistory(pastName) {
-
-
   var ul = document.getElementById("pastSearches");
   var li = document.createElement("li");
   li.appendChild(document.createTextNode(pastName));
